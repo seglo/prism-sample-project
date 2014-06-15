@@ -76,41 +76,16 @@ module.exports = function(grunt) {
       livereload: {
         options: {
           open: true,
-          /*          middleware: function(connect) {
-          return [
-            connect.static('.tmp'),
-            connect().use(
-              '/bower_components',
-              connect.static('./bower_components')
-            ),
-            connect.static(appConfig.app)
-          ];
-        }*/
-          base: [appConfig.app],
-          middleware: function(connect, options) {
-            if (!Array.isArray(options.base)) {
-              options.base = [options.base];
-            }
-
-            // Setup the proxy
-            var middlewares = [require('grunt-connect-prism/lib/events').handleRequest,
+          middleware: function(connect) {
+            return [
+              require('grunt-connect-prism/lib/events').handleRequest,
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
-              )
+              ),
+              connect.static(appConfig.app)
             ];
-
-            // Serve static files.
-            options.base.forEach(function(base) {
-              middlewares.push(connect.static(base));
-            });
-
-            // Make directory browse-able.
-            var directory = options.directory || options.base[options.base.length - 1];
-            middlewares.push(connect.directory(directory));
-
-            return middlewares;
           }
         }
       },
