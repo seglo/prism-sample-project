@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+app.disable('etag');
 app.get('/api/users', function(req, res) {
   res.send([{
     user: 'john',

@@ -1,0 +1,30 @@
+{
+  "requestUrl": "/api/books",
+  "contentType": "application/json; charset=utf-8",
+  "statusCode": 200,
+  "data": [
+    {
+      "book": "the light of other days",
+      "authors": [
+        "arthur c clarke",
+        "stephen baxter"
+      ],
+      "genre": "science fiction"
+    },
+    {
+      "book": "game of thrones: a dance with dragons",
+      "authors": [
+        "george r martin"
+      ],
+      "genre": "fantasy"
+    },
+    {
+      "book": "freakonomics",
+      "authors": [
+        "stephen j dubner",
+        "steven d. levitt"
+      ],
+      "genre": "non-fiction"
+    }
+  ]
+}

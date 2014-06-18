@@ -127,14 +127,12 @@ module.exports = function(grunt) {
     prism: {
       api: {
         options: {
-          proxies: [{
-            mode: 'proxy',
-            mocksPath: './mocks',
-            context: '/api',
-            host: 'localhost',
-            port: 9001,
-            https: false
-          }]
+          mode: 'record',
+          mocksPath: './mocks',
+          context: '/api',
+          host: 'localhost',
+          port: 9001,
+          https: false
         }
       }
     },
@@ -381,18 +379,21 @@ module.exports = function(grunt) {
   });
 
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
-    if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
-    }
+  grunt.registerTask('serve', 'Compile then start a connect web server', function(prismMode) {
+    
+    var prismTask = 'prism:api';
 
+    if (prismMode) {
+      prismTask = prismTask + ':' + prismMode;
+    }
+grunt.log.writeln('prismTask:' + prismTask);
     grunt.task.run([
       'clean:server',
       'wiredep',
       'concurrent:server',
       'autoprefixer',
       'express:api',
-      'prism:api:proxy',
+      prismTask,
       'connect:livereload',
       'watch'
     ]);
