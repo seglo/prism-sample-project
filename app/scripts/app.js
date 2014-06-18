@@ -10,12 +10,9 @@
  */
 angular
   .module('prismSampleProjectApp', [
-    'ngAnimate',
-    'ngCookies',
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch',
     'ngGrid'
   ])
   .config(function ($routeProvider) {
