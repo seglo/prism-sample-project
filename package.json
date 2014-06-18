@@ -2,6 +2,22 @@
   "name": "prism-sample-project",
   "version": "0.0.1",
   "description": "A sample angular project that demonstrates grunt-connect-prism.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seglo/prism-sample-project"
+  },
+  "author": {
+    "name": "Sean Glover",
+    "email": "seglo@randonom.com",
+    "url": "http://randonom.com/blog/"
+  },
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://github.com/seglo/prism-sample-project/blob/master/LICENSE-MIT"
+  }],
+  "bugs": {
+    "url": "https://github.com/seglo/prism-sample-project/issues"
+  },
   "dependencies": {},
   "devDependencies": {
     "express": "^4.4.3",
