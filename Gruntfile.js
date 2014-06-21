@@ -210,7 +210,7 @@ module.exports = function(grunt) {
         debug: false
       },
       e2e: {
-        configFile: "test/protractor.conf.js",
+        configFile: 'test/protractor.conf.js',
         keepAlive: true, // If false, the grunt process stops when the test fails.
         noColor: false, // If true, protractor will not use colors in its output.
         args: {
@@ -223,7 +223,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function(prismMode) {
 
-    var prismTask = 'prism:e2e';
+    var prismTask = 'prism:serve';
 
     if (prismMode) {
       prismTask = prismTask + ':' + prismMode;

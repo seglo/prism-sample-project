@@ -30,5 +30,5 @@ angular.module('prismSampleProjectApp')
 
     $scope.userGridOptions = {
       data: 'users'
-    }
+    };
   });
