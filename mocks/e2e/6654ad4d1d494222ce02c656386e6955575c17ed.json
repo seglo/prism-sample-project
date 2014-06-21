@@ -1,0 +1,22 @@
+{
+  "requestUrl": "/api/users",
+  "contentType": "application/json; charset=utf-8",
+  "statusCode": 200,
+  "data": [
+    {
+      "user": "john",
+      "fave_genre": "science fiction",
+      "last_book_purchased": "the light of other days"
+    },
+    {
+      "user": "genevieve",
+      "fave_genre": "fantasy",
+      "last_book_purchased": "game of thrones: a dance with dragons"
+    },
+    {
+      "user": "zach",
+      "fave_genre": "non-fiction",
+      "last_book_purchased": "freakonomics"
+    }
+  ]
+}

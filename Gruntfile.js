@@ -94,6 +94,7 @@ module.exports = function(grunt) {
           port: 9001,
           middleware: function(connect) {
             return [
+              require('grunt-connect-prism/lib/events').handleRequest,
               connect.static('.tmp'),
               connect.static('test'),
               connect().use(
@@ -111,7 +112,7 @@ module.exports = function(grunt) {
     express: {
       api: {
         options: {
-          port: 9001,
+          port: 9090,
           server: path.resolve('./express-api.js')
         }
       }
@@ -119,15 +120,19 @@ module.exports = function(grunt) {
 
     // Setup one prism
     prism: {
-      api: {
-        options: {
-          mode: 'proxy',
-          mocksPath: './mocks',
-          context: '/api',
-          host: 'localhost',
-          port: 9001,
-          https: false
-        }
+      options: {
+        mode: 'proxy',
+        mocksPath: './mocks',
+        context: '/api',
+        host: 'localhost',
+        port: 9090,
+        https: false
+      },
+      serve: {
+        options: {}
+      },
+      e2e: {
+        options: {}
       }
     },
 
@@ -198,13 +203,27 @@ module.exports = function(grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
+    },
+
+    protractor: {
+      options: {
+        debug: false
+      },
+      e2e: {
+        configFile: "test/protractor.conf.js",
+        keepAlive: true, // If false, the grunt process stops when the test fails.
+        noColor: false, // If true, protractor will not use colors in its output.
+        args: {
+          // Arguments passed to the command
+        }
+      }
     }
   });
 
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function(prismMode) {
-    
-    var prismTask = 'prism:api';
+
+    var prismTask = 'prism:e2e';
 
     if (prismMode) {
       prismTask = prismTask + ':' + prismMode;
@@ -229,6 +248,32 @@ module.exports = function(grunt) {
     'connect:test',
     'karma'
   ]);
+
+  grunt.registerTask('e2e', 'Run end to end tests', function(prismMode) {
+    var prismTask = 'prism:e2e';
+
+    if (prismMode) {
+      prismTask = prismTask + ':' + prismMode;
+    } else {
+      prismTask = prismTask + ':mock';
+    }
+
+    // start the backend API if we're in record mode. this is probably
+    // not applicable if you don't launch your backend server with grunt
+    if (prismMode === 'record') {
+      grunt.task.run(['express:api']);
+    }
+
+    grunt.task.run([
+      'clean:server',
+      'wiredep',
+      'concurrent:server',
+      'autoprefixer',
+      prismTask,
+      'connect:test',
+      'protractor:e2e'
+    ]);
+  });
 
   grunt.registerTask('default', [
     'newer:jshint',
