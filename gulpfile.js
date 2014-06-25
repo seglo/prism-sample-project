@@ -104,6 +104,9 @@ gulp.task('connect', function() {
 });
 
 gulp.task('serve', ['connect', 'styles'], function() {
+  // run backend on port 9090
+  require('./express-api').listen(9090);
+
   require('opn')('http://localhost:9000');
 });
 

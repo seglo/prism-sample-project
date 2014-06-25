@@ -11,15 +11,19 @@
     "email": "seglo@randonom.com",
     "url": "http://randonom.com/blog/"
   },
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://github.com/seglo/prism-sample-project/blob/master/LICENSE-MIT"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/seglo/prism-sample-project/blob/master/LICENSE-MIT"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/seglo/prism-sample-project/issues"
   },
   "dependencies": {},
   "devDependencies": {
+    "connect": "^2.14.4",
+    "connect-livereload": "^0.4.0",
     "express": "^4.4.3",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^0.7.3",
@@ -35,15 +39,6 @@
     "grunt-protractor-runner": "^1.0.0",
     "grunt-wiredep": "^1.7.0",
     "gulp": "^3.8.2",
-    "jshint-stylish": "^0.2.0",
-    "karma": "^0.12.16",
-    "karma-chrome-launcher": "^0.1.4",
-    "karma-jasmine": "^0.1.5",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "load-grunt-tasks": "^0.4.0",
-    "time-grunt": "^0.3.1",
-    "connect": "^2.14.4",
-    "connect-livereload": "^0.4.0",
     "gulp-autoprefixer": "^0.0.7",
     "gulp-bower-files": "^0.2.1",
     "gulp-cache": "^0.1.1",
@@ -60,7 +55,13 @@
     "gulp-uglify": "^0.2.1",
     "gulp-useref": "^0.4.2",
     "jshint-stylish": "^0.2.0",
+    "karma": "^0.12.16",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "load-grunt-tasks": "^0.4.0",
     "opn": "^0.1.1",
+    "time-grunt": "^0.3.1",
     "wiredep": "^1.4.3"
   },
   "engines": {
