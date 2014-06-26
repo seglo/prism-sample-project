@@ -88,6 +88,7 @@ gulp.task('connect', function() {
     .use(require('connect-livereload')({
       port: 35729
     }))
+    .use(require('connect-prism/lib/events').handleRequest)
     .use(connect.static('app'))
     .use(connect.static('.tmp'))
     .use(
@@ -103,11 +104,51 @@ gulp.task('connect', function() {
     });
 });
 
-gulp.task('serve', ['connect', 'styles'], function() {
-  // run backend on port 9090
-  require('./express-api').listen(9090);
+function prismInit(prismMode) {
+  prismMode = prismMode || 'proxy';
+  var options = {
+    options: {
+      mode: 'proxy',
+      mocksPath: './mocks',
+      context: '/api',
+      host: 'localhost',
+      port: 9090,
+      https: false
+    },
+    serve: {
+      options: {}
+    },
+    e2e: {
+      options: {}
+    }
+  };
+
+  var prism = require('connect-prism');
+  prism(options, 'serve', prismMode);
+
+  // start the backend API if we're in record mode. this is probably
+  // not applicable if you don't launch your backend server with gulp
+  if (prismMode === 'record' || prismMode === 'proxy') {
+    require('./express-api').listen(9090);
+  }
 
   require('opn')('http://localhost:9000');
+}
+
+gulp.task('serve', ['connect', 'styles'], function() {
+  prismInit();
+});
+
+gulp.task('serve:mock', ['connect', 'styles'], function() {
+  prismInit('mock');
+});
+
+gulp.task('serve:record', ['connect', 'styles'], function() {
+  prismInit('record');
+});
+
+gulp.task('serve:proxy', ['connect', 'styles'], function() {
+  prismInit('proxy');
 });
 
 // inject bower components

@@ -1,14 +1,12 @@
 # prism-sample-project
 
-> A sample project to demonstrate the use of the [grunt-connect-prism](http://github.com/seglo/grunt-connect-prism) plugin.
+> A sample project to demonstrate the use of the [grunt-connect-prism](http://github.com/seglo/grunt-connect-prism) and [connect-prism](http://github.com/seglo/connect-prism) core plugin for gulp.
 
 ## Getting started
 
-This plugin requires Grunt `~0.4.1` to already be installed.
+This plugin requires Grunt `~0.4.1` or Gulp `~3.8.2` to already be installed
 
-If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
-
-Once Grunt is installed you must also install all the project NPM dependencies by using the following command at the root of the project.
+Once Grunt or gulp is installed you must also install all the project NPM dependencies by using the following command at the root of the project.
 
 ```shell
 npm install
@@ -16,7 +14,7 @@ npm install
 
 ## Overview
 
-The [grunt-connect-prism](http://github.com/seglo/grunt-connect-prism) plugin allows you to record, mock, and proxy HTTP calls.  This is a simple angular application with an express.js server backend that demonstrates its use.
+The [connect-prism](http://github.com/seglo/connect-prism) plugin allows you to record, mock, and proxy HTTP calls.  This is a simple angular application with an express.js server backend that demonstrates its use.  
 
 ## Demonstrations
 
@@ -28,11 +26,13 @@ Launch the website, backend server, and setup prism to proxy to the backend by d
 
 ```shell
 grunt serve
+gulp serve
 ``` 
 or
 
 ```shell
 grunt serve:proxy
+gulp serve:proxy
 ````
 
 ### Record mode
@@ -41,6 +41,7 @@ Launch the website.  Create or overwrite mocks in the `./mocks/serve/` directory
 
 ```shell
 grunt serve:record
+gulp serve:record
 ```
 
 ### Mock mode
@@ -49,9 +50,12 @@ Launch the website.  Mock all requests with serialized responses from the `./moc
 
 ```shell
 grunt serve:mock
+gulp serve:mock
 ```
 
 ## End to end (e2e) testing demonstration
+
+> NOTE: I've only implemented a solution for e2e testing with the Grunt toolchain.  Feel free to submit a PR for a solution in gulp.
 
 In order to demonstrate the end to end testing component of this project a few prequisites are required.  You must install protractor and the selenium server.  
 For more details see the appendix in protractor's README on how to [setup and install the standalone selenium server for use with protractor](https://github.com/angular/protractor#appendix-a-setting-up-a-standalone-selenium-server).
@@ -90,3 +94,4 @@ grunt e2d:proxy
 
 * 0.0.1 Initial release
 * 0.0.2 Update to prism 0.2.2
+* 0.0.3 Support gulp implementation.  Added core connect-prism lib.

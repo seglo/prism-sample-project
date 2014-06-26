@@ -197,14 +197,6 @@ module.exports = function(grunt) {
       ]
     },
 
-    // Test settings
-    karma: {
-      unit: {
-        configFile: 'test/karma.conf.js',
-        singleRun: true
-      }
-    },
-
     protractor: {
       options: {
         debug: false
@@ -241,13 +233,7 @@ module.exports = function(grunt) {
     ]);
   });
 
-  grunt.registerTask('test', [
-    'clean:server',
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test',
-    'karma'
-  ]);
+  grunt.registerTask('test', ['e2e']);
 
   grunt.registerTask('e2e', 'Run end to end tests', function(prismMode) {
     var prismTask = 'prism:e2e';
