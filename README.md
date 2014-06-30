@@ -93,5 +93,6 @@ grunt e2d:proxy
 ## Changelog
 
 * 0.0.1 Initial release
-* 0.0.2 Update to prism 0.2.2
+* 0.0.2 Update to grunt-connect-prism 0.2.2
 * 0.0.3 Support gulp implementation.  Added core connect-prism lib.
+* 0.0.4 Update to grunt-connect-prism 0.3.0

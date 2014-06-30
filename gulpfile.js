@@ -2,6 +2,7 @@
 // generated on 2014-06-25 using generator-gulp-webapp 0.1.0
 
 var gulp = require('gulp');
+var prism = require('connect-prism');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -88,7 +89,7 @@ gulp.task('connect', function() {
     .use(require('connect-livereload')({
       port: 35729
     }))
-    .use(require('connect-prism/lib/events').handleRequest)
+    .use(prism.middleware)
     .use(connect.static('app'))
     .use(connect.static('.tmp'))
     .use(
@@ -106,25 +107,14 @@ gulp.task('connect', function() {
 
 function prismInit(prismMode) {
   prismMode = prismMode || 'proxy';
-  var options = {
-    options: {
-      mode: 'proxy',
-      mocksPath: './mocks',
-      context: '/api',
-      host: 'localhost',
-      port: 9090,
-      https: false
-    },
-    serve: {
-      options: {}
-    },
-    e2e: {
-      options: {}
-    }
-  };
 
-  var prism = require('connect-prism');
-  prism(options, 'serve', prismMode);
+  prism.create({
+    name: 'serve',
+    mode: prismMode,
+    context: '/api',
+    host: 'localhost',
+    port: 9090
+  });
 
   // start the backend API if we're in record mode. this is probably
   // not applicable if you don't launch your backend server with gulp
