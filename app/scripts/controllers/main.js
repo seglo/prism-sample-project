@@ -9,7 +9,7 @@
  */
 angular.module('prismSampleProjectApp')
   .controller('MainCtrl', function($scope, $http) {
-    
+
     $http({
       method: 'GET',
       url: '/api/users'
@@ -24,11 +24,22 @@ angular.module('prismSampleProjectApp')
       $scope.books = result.data;
     });
 
+    $http({
+      method: 'GET',
+      url: '/api/bookauthors' // tests rewrite rule
+    }).then(function(result) {
+      $scope.authors = result.data;
+    });
+
     $scope.bookGridOptions = {
       data: 'books'
     };
 
     $scope.userGridOptions = {
       data: 'users'
+    };
+
+    $scope.authorsGridOptions = {
+      data: 'authors'
     };
   });

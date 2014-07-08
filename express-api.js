@@ -31,4 +31,17 @@ app.get('/api/books', function(req, res) {
     genre: 'non-fiction'
   }]);
 });
+app.get('/api/authors', function(req, res) {
+  res.send([{
+    name: 'arthur c clarke',
+  }, {
+    name: 'stephen baxter'
+  }, {
+    name: 'george r martin'
+  }, {
+    name: 'stephen j dubner'
+  }, {
+    name: 'steven d. levitt'
+  }]);
+});
 module.exports = app;

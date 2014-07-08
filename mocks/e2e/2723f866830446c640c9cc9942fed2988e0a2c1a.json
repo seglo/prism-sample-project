@@ -1,0 +1,22 @@
+{
+  "requestUrl": "/api/authors",
+  "contentType": "application/json; charset=utf-8",
+  "statusCode": 200,
+  "data": [
+    {
+      "name": "arthur c clarke"
+    },
+    {
+      "name": "stephen baxter"
+    },
+    {
+      "name": "george r martin"
+    },
+    {
+      "name": "stephen j dubner"
+    },
+    {
+      "name": "steven d. levitt"
+    }
+  ]
+}

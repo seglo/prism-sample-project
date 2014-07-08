@@ -126,14 +126,17 @@ module.exports = function(grunt) {
         context: '/api',
         host: 'localhost',
         port: 9090,
-        https: false
+        https: false,
+        /* delay only works in mock mode.
+           to turn off delay omit delay property or set to 0 */
+        delay: 'auto',
+        /* rewrites requests to context */
+        rewrite: {
+          '^/api/bookauthors': '/api/authors',
+        }
       },
-      serve: {
-        options: {}
-      },
-      e2e: {
-        options: {}
-      }
+      serve: {},
+      e2e: {}
     },
 
 

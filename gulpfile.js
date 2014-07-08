@@ -113,7 +113,11 @@ function prismInit(prismMode) {
     mode: prismMode,
     context: '/api',
     host: 'localhost',
-    port: 9090
+    port: 9090,
+    delay: 'auto',
+    rewrite: {
+      '^/api/bookauthors': '/api/authors',
+    }
   });
 
   // start the backend API if we're in record mode. this is probably
