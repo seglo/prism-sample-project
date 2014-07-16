@@ -31,6 +31,21 @@ angular.module('prismSampleProjectApp')
       $scope.authors = result.data;
     });
 
+    $http({
+      method: 'GET',
+      url: '/api/newendpoint'
+    });
+
+    $http({
+      method: 'GET',
+      url: '/api/authors?foo=value'
+    });
+
+    $http({
+      method: 'GET',
+      url: '/api/authors?bar=value'
+    });
+
     $scope.bookGridOptions = {
       data: 'books'
     };

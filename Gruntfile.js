@@ -133,6 +133,7 @@ module.exports = function(grunt) {
         /* rewrites requests to context */
         rewrite: {
           '^/api/bookauthors': '/api/authors',
+          '^/api/authors\??.*': '/api/authors'
         }
       },
       serve: {},

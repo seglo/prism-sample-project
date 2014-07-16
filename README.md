@@ -14,7 +14,7 @@ npm install
 
 ## Overview
 
-The [connect-prism](http://github.com/seglo/connect-prism) plugin allows you to record, mock, and proxy HTTP calls.  This is a simple angular application with an express.js server backend that demonstrates its use.  
+The [connect-prism](http://github.com/seglo/connect-prism) core library and [grunt-connect-prism](http://github.com/seglo/grunt-connect-prism) plugin allows you to record, mock, and proxy HTTP calls.  This is a simple angular application with an express.js server backend that demonstrates their use.  
 
 ## Demonstrations
 
@@ -97,3 +97,4 @@ grunt e2d:proxy
 * 0.0.3 Support gulp implementation.  Added core connect-prism lib.
 * 0.0.4 Update to grunt-connect-prism 0.3.0
 * 0.0.5 Update to grunt-connect-prism 0.4.0
+* 0.0.6 Update to [grunt-]connect-prism 0.4.1
