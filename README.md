@@ -58,7 +58,11 @@ gulp serve:mock
 > NOTE: I've only implemented a solution for e2e testing with the Grunt toolchain.  Feel free to submit a PR for a solution in gulp.
 
 In order to demonstrate the end to end testing component of this project a few prequisites are required.  You must install protractor and the selenium server.  
-For more details see the appendix in protractor's README on how to [setup and install the standalone selenium server for use with protractor](https://github.com/angular/protractor#appendix-a-setting-up-a-standalone-selenium-server).
+For more details see the appendix in protractor's README on how to [setup and install the standalone selenium server for use with protractor](https://github.com/angular/protractor#appendix-a-setting-up-a-standalone-selenium-server).  Once installed run the server with the following.
+
+```shell
+webdriver-manager start
+```
 
 You can run the e2e test suite with the same 3 modes you ran the project in.  Ultimately, the purpose of this demonstration is to show how you can easily record the calls your application makes and then run your e2e test suite as a "client side e2e" test suite and mock out the server.  In many projects the server and all of its dependencies can incur a significant latency during test runs.  Using [grunt-connect-prism](http://github.com/seglo/grunt-connect-prism) can dramatically decrease the time it takes to run your tests.
 
@@ -87,14 +91,15 @@ grunt e2e:record
 Run e2e test suite and proxy all HTTP requests to a real backend.
 
 ```shell
-grunt e2d:proxy
+grunt e2e:proxy
 ```
 
 ## Changelog
 
-* 0.0.1 Initial release
-* 0.0.2 Update to grunt-connect-prism 0.2.2
-* 0.0.3 Support gulp implementation.  Added core connect-prism lib.
-* 0.0.4 Update to grunt-connect-prism 0.3.0
+* 0.0.7 Update to prism 0.7.3
+* 0.0.6 Update to grunt-connect-prism 0.4.1
 * 0.0.5 Update to grunt-connect-prism 0.4.0
-* 0.0.6 Update to [grunt-]connect-prism 0.4.1
+* 0.0.4 Update to grunt-connect-prism 0.3.0
+* 0.0.3 Support gulp implementation.  Added core connect-prism lib.
+* 0.0.2 Update to grunt-connect-prism 0.2.2
+* 0.0.1 Initial release

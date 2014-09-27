@@ -117,6 +117,7 @@ function prismInit(prismMode) {
     delay: 'auto',
     rewrite: {
       '^/api/bookauthors': '/api/authors',
+      '^/api/authors\??.*': '/api/authors'
     }
   });
 
