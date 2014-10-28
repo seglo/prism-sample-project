@@ -6,10 +6,11 @@
 
 This plugin requires Grunt `~0.4.1` or Gulp `~3.8.2` to already be installed
 
-Once Grunt or gulp is installed you must also install all the project NPM dependencies by using the following command at the root of the project.
+Once Grunt or gulp is installed you must also install all the project NPM and bower dependencies by using the following commands at the root of the project.
 
 ```shell
 npm install
+bower install
 ```
 
 ## Overview
