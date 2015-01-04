@@ -128,8 +128,10 @@ module.exports = function(grunt) {
         port: 9090,
         https: false,
         /* delay only works in mock mode.
-           to turn off delay omit delay property or set to 0 */
-        delay: 'auto',
+           to turn off delay omit delay property or set to 0 
+        delay: 'auto', */
+        /* turn on prism api at /_prism/ base route */
+        useApi: true,
         /* rewrites requests to context */
         rewrite: {
           '^/api/bookauthors': '/api/authors',

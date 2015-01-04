@@ -3,4 +3,8 @@
 <h1>Books</h1>
 <div id="booksGrid" class="gridStyle" ng-grid="bookGridOptions"></div>
 <h1>Authors</h1>
-<div id="booksGrid" class="gridStyle" ng-grid="authorsGridOptions"></div>
+<div id="authorsGrid" class="gridStyle" ng-grid="authorsGridOptions" ng-show="!showError"></div>
+<div id="authorsGridErrors" ng-show="showError">
+  <div>An error occurred</div>
+  <div>{{errorMessage}}</div>
+</div>

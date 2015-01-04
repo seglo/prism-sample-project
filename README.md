@@ -95,6 +95,20 @@ Run e2e test suite and proxy all HTTP requests to a real backend.
 grunt e2e:proxy
 ```
 
+## Program different responses using connect-prism API
+
+Sometimes you want to return different responses for the same HTTP call in your integration tests.  This is useful when you want to test how your client behaves in different situations.
+
+In this example we will test the GET `/api/books` call under the following situations.
+
+* Valid response
+* Server error (500) response
+* Authentication error (401) response
+
+
+
+
+
 ## Changelog
 
 * 0.0.7 Update to prism 0.7.3
