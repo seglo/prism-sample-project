@@ -2,7 +2,7 @@ var http = require('http');
 
 describe('prism sample project', function() {
   afterEach(function(done) {
-    httpPost('/_prism/override/e2e/clear', function(res) {
+    httpPost('/_prism/override/e2e/clear').then(function(res) {
       done();
     });
   });
@@ -39,56 +39,55 @@ describe('prism sample project', function() {
       }
     });
 
-    httpPost('/_prism/override/e2e/create', function (res) {
+    httpPost('/_prism/override/e2e/create', override)
+    .then(function (res) {
       browser.get('http://localhost:9001/#/');
+      return element.all(by.css('#authorsGridErrors div'));
+    })
+    .then(function (divs) {
+      var errorMsg = divs[1];
+      expect(errorMsg.isDisplayed(), true);
+      expect(errorMsg.getText()).toBe('Unauthorized user.');
 
-      var spans = element.all(by.css('#authorsGridErrors div'));
-      var errSpan = spans.get(1);
-      expect(errSpan.isDisplayed(), true);
-      expect(errSpan.getText()).toBe('Unauthorized user.');
+      // element() doesn't return a promise.. how come?  using element.all instead
+      return element.all(by.css('#authorsGrid'));
+    })
+    .then(function(authorsGrid) {
+      expect(authorsGrid[0].isDisplayed(), false);
 
-        // // element() doesn't return a promise.. how come?  using element.all instead
-        var authorsGrid = element.all(by.css('#authorsGrid'));
-        expect(authorsGrid.get(0).isDisplayed(), false);
-
-        done();
-
-      }, override);
+      done();
+    });
   });
 
-  // it('should show unknown error message', function() {
-  //   var override = JSON.stringify({
-  //     "mock": {
-  //       "requestUrl": "/api/authors",
-  //       "contentType": "text/plain",
-  //       "statusCode": 500,
-  //       "data": "Unknown server error."
-  //     }
-  //   });
+  it('should show unauthorized user error message', function(done) {
+    var override = JSON.stringify({
+      "mock": {
+        "requestUrl": "/api/authors",
+        "contentType": "text/plain",
+        "statusCode": 500,
+        "data": "Unknown server error."
+      }
+    });
 
-  //   httpPost('/_prism/override/e2e/create', override)
-  //   .then(function (res) {
-  //     browser.get('http://localhost:9001/#/');
-  //     console.log('foo');
-  //     done();
-  //       //return element.all(by.css('#authorsGridErrors div'));
-  //     });/*
-  //   .then(function (spans) {
-  //     var errSpan = spans[1];
-  //     expect(errSpan.isDisplayed(), true);
-  //     expect(errSpan.getText()).toBe('Unknown server error.');
+    httpPost('/_prism/override/e2e/create', override)
+    .then(function (res) {
+      browser.get('http://localhost:9001/#/');
+      return element.all(by.css('#authorsGridErrors div'));
+    })
+    .then(function (divs) {
+      var errorMsg = divs[1];
+      expect(errorMsg.isDisplayed(), true);
+      expect(errorMsg.getText()).toBe('Unknown server error.');
 
-  //     done();
-  //       // element() doesn't return a promise.. how come?  using element.all instead
-  //       return element.all(by.css('#authorsGrid'));
-  //     })
-  //   .then(function (authorsGrid) {
-  //     expect(authorsGrid[0].isDisplayed(), false);
+      // element() doesn't return a promise.. how come?  using element.all instead
+      return element.all(by.css('#authorsGrid'));
+    })
+    .then(function(authorsGrid) {
+      expect(authorsGrid[0].isDisplayed(), false);
 
-  //     done();
-  //   });*/
-  // });
-
+      done();
+    });
+  });
 });
 
 // why did i set request options agent: false ?
@@ -104,13 +103,17 @@ describe('prism sample project', function() {
 // similar problem on SO:
 // http://stackoverflow.com/questions/15909884/sockets-dont-appear-to-be-closing-when-using-node-js-http-get
 
-function httpPost(path, cb, body) {
+function httpPost(path, body) {
+  var deferred = protractor.promise.defer();
   var options = {
     host: 'localhost',
     path: path,
     port: 9001,
     method: 'POST',
     agent: false
+  };
+  var cb = function(res) {
+    deferred.fulfill(res);
   };
   var req;
 
@@ -125,4 +128,5 @@ function httpPost(path, cb, body) {
     req = http.request(options, cb);
   }
   req.end();
+  return deferred.promise;
 }
