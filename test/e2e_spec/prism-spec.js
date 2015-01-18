@@ -20,83 +20,85 @@ describe('prism sample project', function() {
     expect(names.get(2).getText()).toEqual('zach');
   });
 
+  describe('retrieving authors grid', function() {
 
-  it('should return 5 authors successfully', function() {
-    browser.get('http://localhost:9001/#/');
-
-    var names = element.all(by.css('#authorsGrid .col0 span'));
-
-    expect(names.count()).toBe(5);
-  });
-
-  it('should show unauthorized user error message', function(done) {
-    var override = JSON.stringify({
-      "mock": {
-        "requestUrl": "/api/authors",
-        "contentType": "text/plain",
-        "statusCode": 401,
-        "data": "Unauthorized user."
-      }
-    });
-
-    httpPost('/_prism/override/e2e/create', override)
-    .then(function (res) {
+    it('should return 5 authors successfully', function() {
       browser.get('http://localhost:9001/#/');
-      return element.all(by.css('#authorsGridErrors div'));
-    })
-    .then(function (divs) {
-      var errorMsg = divs[1];
-      expect(errorMsg.isDisplayed(), true);
-      expect(errorMsg.getText()).toBe('Unauthorized user.');
 
-      // element() doesn't return a promise.. how come?  using element.all instead
-      return element.all(by.css('#authorsGrid'));
-    })
-    .then(function(authorsGrid) {
-      expect(authorsGrid[0].isDisplayed(), false);
+      var names = element.all(by.css('#authorsGrid .col0 span'));
 
-      done();
-    });
-  });
-
-  it('should show unauthorized user error message', function(done) {
-    var override = JSON.stringify({
-      "mock": {
-        "requestUrl": "/api/authors",
-        "contentType": "text/plain",
-        "statusCode": 500,
-        "data": "Unknown server error."
-      }
+      expect(names.count()).toBe(5);
     });
 
-    httpPost('/_prism/override/e2e/create', override)
-    .then(function (res) {
-      browser.get('http://localhost:9001/#/');
-      return element.all(by.css('#authorsGridErrors div'));
-    })
-    .then(function (divs) {
-      var errorMsg = divs[1];
-      expect(errorMsg.isDisplayed(), true);
-      expect(errorMsg.getText()).toBe('Unknown server error.');
+    it('should show unauthorized user error message', function(done) {
+      var override = JSON.stringify({
+        "mock": {
+          "requestUrl": "/api/authors",
+          "contentType": "text/plain",
+          "statusCode": 401,
+          "data": "Unauthorized user."
+        }
+      });
 
-      // element() doesn't return a promise.. how come?  using element.all instead
-      return element.all(by.css('#authorsGrid'));
-    })
-    .then(function(authorsGrid) {
-      expect(authorsGrid[0].isDisplayed(), false);
+      httpPost('/_prism/override/e2e/create', override)
+      .then(function (res) {
+        browser.get('http://localhost:9001/#/');
+        return element.all(by.css('#authorsGridErrors div'));
+      })
+      .then(function (divs) {
+        var errorMsg = divs[1];
+        expect(errorMsg.isDisplayed(), true);
+        expect(errorMsg.getText()).toBe('Unauthorized user.');
 
-      done();
+        // element() doesn't return a promise.. how come?  using element.all instead
+        return element.all(by.css('#authorsGrid'));
+      })
+      .then(function(authorsGrid) {
+        expect(authorsGrid[0].isDisplayed(), false);
+
+        done();
+      });
+    });
+
+    it('should show unauthorized user error message', function(done) {
+      var override = JSON.stringify({
+        "mock": {
+          "requestUrl": "/api/authors",
+          "contentType": "text/plain",
+          "statusCode": 500,
+          "data": "Unknown server error."
+        }
+      });
+
+      httpPost('/_prism/override/e2e/create', override)
+      .then(function (res) {
+        browser.get('http://localhost:9001/#/');
+        return element.all(by.css('#authorsGridErrors div'));
+      })
+      .then(function (divs) {
+        var errorMsg = divs[1];
+        expect(errorMsg.isDisplayed(), true);
+        expect(errorMsg.getText()).toBe('Unknown server error.');
+
+        // element() doesn't return a promise.. how come?  using element.all instead
+        return element.all(by.css('#authorsGrid'));
+      })
+      .then(function(authorsGrid) {
+        expect(authorsGrid[0].isDisplayed(), false);
+
+        done();
+      });
     });
   });
 });
 
 // why did i set request options agent: false ?
 
-// by default all http requests are keep-alive so the underlying request
+// by default all http requests are keep-alive so the underlying request socket
 // isn't released immediately.  since we're making a lot of repetitive http
 // requests to the same host:port:path we hit the default global agent socket
 // pool connection limit of 5 pretty fast (require('http').globalAgent.maxSockets).
-// turning off the agent lets us // create new requests without this limitation
+// turning off the agent lets us create new requests without this limitation.
 
 // http://nodejs.org/api/http.html#http_class_http_agent
 

@@ -4,7 +4,7 @@
 
 ## Getting started
 
-This plugin requires Grunt `~0.4.1` or Gulp `~3.8.2` to already be installed
+This plugin requires Grunt `~0.4.1` or Gulp `~3.8.2` to already be installed.
 
 Once Grunt or gulp is installed you must also install all the project NPM and bower dependencies by using the following commands at the root of the project.
 
@@ -99,18 +99,17 @@ grunt e2e:proxy
 
 Sometimes you want to return different responses for the same HTTP call in your integration tests.  This is useful when you want to test how your client behaves in different situations.
 
-In this example we will test the GET `/api/books` call under the following situations.
+In this example we will test the GET `/api/authors` call under the following situations.
 
 * Valid response
 * Server error (500) response
 * Authentication error (401) response
 
-
-
-
+These tests run as part of the `grunt e2e` target.  See the [`prism-spec.js`](https://github.com/seglo/prism-sample-project/blob/master/test/e2e_spec/prism-spec.js) Jasmine testsuite for more details on the implementation.
 
 ## Changelog
 
+* 0.0.8 Add connect-prism API examples.
 * 0.0.7 Update to prism 0.7.3
 * 0.0.6 Update to grunt-connect-prism 0.4.1
 * 0.0.5 Update to grunt-connect-prism 0.4.0
